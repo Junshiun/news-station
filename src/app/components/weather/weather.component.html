@@ -1,0 +1,49 @@
+<div class="weather-wrap">
+    <div class="topBar">
+        <span class="weatherCountry">{{location.code}}</span>
+        <span class="weatherTime">{{current.time}}</span>
+        <div class="weatherToday">
+            <span class="weatherDay">{{current.day}}</span>
+            <span class="weatherDate">{{current.date}}</span>
+            <span class="weatherMonth">{{current.month}}</span>
+        </div>
+    </div>
+    <div class="weatherInfo">
+        <img class="weatherIcon" src={{weatherData.icon}}>
+        <div class="weatherOverview">
+            <span>{{weatherData.description}}</span>
+            <span>{{weatherData.temp}} °C</span>
+        </div>
+    </div>
+    <span class="weatherFeelsLike">Feels like: {{weatherData.feels}} °C</span>
+    <span class="weatherCity">
+        <mat-icon>location_on</mat-icon>
+        <div class="currentLocation">
+            <input (input)="onInput($any($event.target).value)" type="text" placeholder={{weatherData.city}} id="currentCity" #locationInput>
+            <span class="currentCountry">{{location.country}}</span>
+        </div>
+        <div [ngClass]="{'hideMenu' : (filteredShow===0)}" class="filteredCityWrap" #filteredCityWrap>
+            <div *ngFor="let city of filteredCity" class="filteredCity" (click)="onClick(city)">
+                <a>{{city.name}}</a>
+                <a class="filteredCountry">{{city.country}}</a>
+            </div>
+        </div>
+        <!--
+        <div *ngIf="filteredCity !== null && filteredCity !==undefined && filteredShow != 0" class="filteredCityWrap" #filteredCityWrap>
+            <div *ngFor="let city of filteredCity" class="filteredCity" (click)="onClick(city)">
+                <a>{{city.name}}</a>
+                <a class="filteredCountry">{{city.country}}</a>
+            </div>
+        </div>
+        -->
+    </span>
+    <div class="weatherForecast">
+        <div *ngFor="let item of forecastObject" class="forecastBox">
+            <span>{{item.date}} {{item.month}}</span>
+            <span>{{item.day}}</span> 
+            <span>{{item.time}}</span>     
+            <img class="forecastIcon" src={{item.icon}}>
+            <span>{{item.temp}} °C</span> 
+        </div>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+.weather-wrap {
+    max-width: 100%;
+    width: 15rem;
+    border-radius: 1rem;
+    padding: 1rem;
+    font-size: 0.8rem;
+    margin: 1rem;
+
+    .topBar {
+        display: flex;
+        justify-content: space-between;
+
+        .weather {
+            &Country {
+                display: flex;
+                justify-content: left;
+                align-items: center;
+            }
+        
+            &Time {
+                text-align: center;
+            }
+
+            &Today {
+                display: flex;
+                justify-content: right;
+            }
+
+            &Day {
+                margin-right: 0.5rem;
+            }
+
+            &Date {
+                margin-right: 0.1rem;
+            }
+        }
+    }
+
+    .weather {
+        &Info {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        &FeelsLike {
+            text-align: center;
+            font-size: 0.6rem;
+            margin-bottom: 2rem;
+        }
+
+        &City {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+
+            .mat-icon {
+                font-size: 0.8rem;
+                width: 0.8rem;
+                height: 0.8rem;
+                margin-right: 0.5rem;
+            }
+
+            .currentCountry {
+                color: #999999;
+                margin-left: 0.5rem;
+                font-size: 0.6rem;
+            }
+
+            .filteredCityWrap {
+                position: absolute;
+                left: 0;
+                top: 1.5rem;
+                max-height: 10rem;
+                overflow-y: auto;
+                overflow-x: hidden;
+                background-color: white;
+                width: 100%;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .filteredCityWrap.hideMenu {
+                display: none;
+            }
+
+            .filteredCity {
+                margin-bottom: 0.5rem;
+            }
+
+            .filteredCountry {
+                font-size: 0.6rem;
+                color: #999999;
+                margin-left: 0.5rem;
+            }
+        }
+    }
+
+    .weather {
+        &Forecast {
+            display: flex;
+            overflow-x: scroll;  
+            font-size: 0.6rem;
+            padding-bottom: 0.5rem;
+            
+            .forecastBox {
+                text-align: center;
+                margin-right: 1rem;
+            }
+
+            img {
+                font-size: 3rem;
+                width: 3rem;
+                height: 3rem;
+            }
+        }   
+    }
+}
+
+span {
+    display: block;
+}
