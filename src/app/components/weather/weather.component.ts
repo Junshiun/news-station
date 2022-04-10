@@ -78,22 +78,31 @@ export class WeatherComponent implements OnInit {
 
   onInput(value:string) {
 
-    this.filteredShow = 1;
+    let exactValue = value;
+
+    value = value.replace(/\s/g, "");
 
     let regex = new RegExp(value, "i");
 
     let regexStrict = new RegExp("^" + value, "i");
 
-    if(value.length < 2)
+    if(value.length < 3) {
+      this.filteredShow = 2;
+      this.filteredCity = [
+        {
+          country: "Please enter at least 3 characters to search..."
+        }
+      ]
       return;
+    }
 
     clearTimeout(this.timer);
     this.timer = setTimeout(() => this._weatherFetchService.fetchCity().subscribe(item => {
       let firstFilter = item.filter((city:any) => {
-        return (city.name.match(regex) != null)
+        return (city.name.replace(/\s/g, "").match(regex) != null)
       })
       let secondFilter = firstFilter.filter((city:any) => {
-        return (city.name.match(regexStrict) != null)
+        return (city.name.replace(/\s/g, "").match(regexStrict) != null)
       })
 
       let firstSort = secondFilter.sort((a:any, b:any) => a.name.localeCompare(b.name))
@@ -109,6 +118,17 @@ export class WeatherComponent implements OnInit {
           country: this._weatherFetchService.Country[location.country]
         }
       })
+
+      this.filteredShow = 1;
+
+      if (this.filteredCity.length === 0){
+        this.filteredShow = 2;
+        this.filteredCity = [
+          {
+            country: "no results found for " + exactValue
+          }
+        ]
+      }
 
     }), 800)
 

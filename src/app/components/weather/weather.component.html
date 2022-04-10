@@ -22,13 +22,23 @@
             <input (input)="onInput($any($event.target).value)" type="text" placeholder={{weatherData.city}} id="currentCity" #locationInput>
             <span class="currentCountry">{{location.country}}</span>
         </div>
-        <div [ngClass]="{'hideMenu' : (filteredShow===0)}" class="filteredCityWrap" #filteredCityWrap>
-            <div *ngFor="let city of filteredCity" class="filteredCity" (click)="onClick(city)">
-                <a>{{city.name}}</a>
-                <a class="filteredCountry">{{city.country}}</a>
-            </div>
+        <div #filteredCityWrap>
+            <ul *ngIf="(filteredShow === 1); else searchInfo" class="filteredCityWrap">
+                <li *ngFor="let city of filteredCity" class="filteredCity city" (click)="onClick(city)">
+                    <a>{{city.name}}</a>
+                    <a class="filteredCountry">{{city.country}}</a>
+                </li>
+            </ul>
+            <ng-template #searchInfo>
+                <ul *ngIf="filteredShow === 2" class="filteredCityWrap">
+                    <div class="filteredCity">
+                        <span class="filteredCountry">{{filteredCity[0].country}}</span>
+                    </div>
+                </ul>
+            </ng-template>
         </div>
         <!--
+        <ul [ngClass]="{'hideMenu' : (filteredShow===0)}" class="filteredCityWrap" #filteredCityWrap>
         <div *ngIf="filteredCity !== null && filteredCity !==undefined && filteredShow != 0" class="filteredCityWrap" #filteredCityWrap>
             <div *ngFor="let city of filteredCity" class="filteredCity" (click)="onClick(city)">
                 <a>{{city.name}}</a>

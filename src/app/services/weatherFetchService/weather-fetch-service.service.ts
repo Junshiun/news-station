@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { Subject, BehaviorSubject, Observable} from 'rxjs';
+import { Subject, BehaviorSubject, Observable, timeout} from 'rxjs';
 import { ILocation, ICurrent, IWeatherData, IForecast } from './weatherObject';
 import { HttpClient } from '@angular/common/http';
 
 const WeatherBaseUrl = "https://api.openweathermap.org/data/2.5/weather?";
 const WeatherForecastUrl = "https://api.openweathermap.org/data/2.5/forecast?";
 const API_KEY = "f427754ed3a2eeae877fa7e31b38c3a1";
-const ICON_URL = "http://openweathermap.org/img/wn/";
+const ICON_URL = "https://openweathermap.org/img/wn/";
 const DAY = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTH = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 const CITY_JSON = "./assets/data/city.list.json";
@@ -19,6 +19,8 @@ const COUNTRY_JSON = "./assets/data/country.json"
 export class WeatherFetchServiceService {
 
   Country: any;
+
+  private countryLoad: number = 0; //0: loading 1: done
 
   private _location: BehaviorSubject<ILocation> = new BehaviorSubject({
     longitude: 112.5,
@@ -56,7 +58,10 @@ export class WeatherFetchServiceService {
 
   constructor(private http:HttpClient) {
     this.http.get(COUNTRY_JSON)
-                 .subscribe(data => this.Country = data);
+                 .subscribe(data => {
+                   this.Country = data;
+                   this.countryLoad = 1;
+                  });
   }
 
   locationState: number = 0; //ensure users only asked once for location permission
@@ -95,14 +100,8 @@ export class WeatherFetchServiceService {
       return res;
   })
 
-    this._location.next({
-      ...location,
-      code: data.sys.country,
-      country: this.Country[data.sys.country]
-    })
-
-    data = await fetch (WeatherForecastUrl + "lat=" + location.latitude + "&lon=" + location.longitude + "&units=metric" + "&appid=" + API_KEY).then(res => res.json());
-    this._forecast.next(data.list.filter((item:any) => {
+    let forecastData = await fetch (WeatherForecastUrl + "lat=" + location.latitude + "&lon=" + location.longitude + "&units=metric" + "&appid=" + API_KEY).then(res => res.json());
+    this._forecast.next(forecastData.list.filter((item:any) => {
       return (this._current.value.wholeDate < new Date (item.dt_txt))
     }).map((item:any) => {
       let date = new Date (item.dt_txt);
@@ -116,6 +115,26 @@ export class WeatherFetchServiceService {
         temp: item.main.temp
       })
     }))
+
+    let loadThreshold = 0;
+
+    if (this.countryLoad === 0){
+      loadThreshold = await new Promise ((resolve, reject) => {
+        setTimeout(() => {
+            resolve(1)
+        }, 5000)
+      }).then(() => {
+        return 1
+      })
+    }
+
+    if (this.countryLoad === 1) {
+      this._location.next({
+        ...location,
+        code: data.sys.country,
+        country: this.Country[data.sys.country]
+      })
+    }
   }
 
   fetchData() {
