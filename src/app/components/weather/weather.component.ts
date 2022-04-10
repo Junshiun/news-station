@@ -86,11 +86,11 @@ export class WeatherComponent implements OnInit {
 
     let regexStrict = new RegExp("^" + value, "i");
 
-    if(value.length < 3) {
+    if(value.length < 2) {
       this.filteredShow = 2;
       this.filteredCity = [
         {
-          country: "Please enter at least 3 characters to search..."
+          country: "Please enter at least 2 characters to search..."
         }
       ]
       return;
@@ -98,26 +98,45 @@ export class WeatherComponent implements OnInit {
 
     clearTimeout(this.timer);
     this.timer = setTimeout(() => this._weatherFetchService.fetchCity().subscribe(item => {
-      let firstFilter = item.filter((city:any) => {
-        return (city.name.replace(/\s/g, "").match(regex) != null)
-      })
-      let secondFilter = firstFilter.filter((city:any) => {
-        return (city.name.replace(/\s/g, "").match(regexStrict) != null)
-      })
 
-      let firstSort = secondFilter.sort((a:any, b:any) => a.name.localeCompare(b.name))
+      if (value.length > 3) {
+        let firstFilter = item.filter((city:any) => {
+          return (city.name.replace(/\s/g, "").match(regex) != null)
+        })
 
-      let secondSort = firstFilter.sort((a:any, b:any) => a.name.localeCompare(b.name))
+        let secondFilter = firstFilter.filter((city:any) => {
+          return (city.name.replace(/\s/g, "").match(regexStrict) != null)
+        })
 
-      let filteredSet = new Set([...firstSort, ...secondSort])
+        let firstSort = secondFilter.sort((a:any, b:any) => a.name.localeCompare(b.name))
 
-      this.filteredCity = [...filteredSet].map((location) => {
-        return {
-          ...location,
-          code: location.country,
-          country: this._weatherFetchService.Country[location.country]
-        }
-      })
+        let secondSort = firstFilter.sort((a:any, b:any) => a.name.localeCompare(b.name))
+
+        let filteredSet = new Set([...firstSort, ...secondSort])
+
+        this.filteredCity = [...filteredSet].map((location) => {
+          return {
+            ...location,
+            code: location.country,
+            country: this._weatherFetchService.Country[location.country]
+          }
+        })
+      }
+      else{
+        let firstFilter = item.filter((city:any) => {
+          return (city.name.replace(/\s/g, "").match(regexStrict) != null)
+        })
+
+        let firstSort = firstFilter.sort((a:any, b:any) => a.name.localeCompare(b.name))
+
+        this.filteredCity = [...firstSort].map((location) => {
+          return {
+            ...location,
+            code: location.country,
+            country: this._weatherFetchService.Country[location.country]
+          }
+        })
+      }
 
       this.filteredShow = 1;
 
