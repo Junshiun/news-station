@@ -57,3 +57,10 @@
         }
     }
 }
+
+@media screen and (max-width: 850px) {
+    .detailsBox {
+        max-height: 70%;
+        overflow-y: auto;
+    }
+}

@@ -17,6 +17,7 @@ export const PAGE_SIZE = "page-size=";
 export const API_KEY = "api-key=31b5604b-361c-4a18-9a6d-de6101cc3821";
 
 export const SHOW_FIELD_THUMB = "show-fields=all";
+export const CATEGORY = ["world", "technology", "business", "sport", "film"];
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class NewsFetchServiceService {
   private _topNews:Subject<any> = new Subject();
   topNews$ = this._topNews.asObservable();
 
-  private _categoryNewsLoad:BehaviorSubject<number> = new BehaviorSubject(0);
+  private _categoryNewsLoad:BehaviorSubject<any> = new BehaviorSubject(Array(CATEGORY.length).fill(0));
   categoryNewsLoad$ = this._categoryNewsLoad.asObservable();
 
   private _categoryNews:Subject<any> = new Subject();
@@ -74,6 +75,7 @@ export class NewsFetchServiceService {
   async fetchCategoryNews(category: any) {
     
     let newsArray: any = [];
+    let loadArray: any = Array(CATEGORY.length).fill(0);
 
     for (let i=0; i<category.length; i++){
 
@@ -83,7 +85,7 @@ export class NewsFetchServiceService {
       //fetchedNews = await fetch(NEWS_BASE + endpoint + "?" + NEWS_COUNTRY + country + "&" + NEWS_CATEORY + category[i] + API_KEY).then(res => res.json());
       //fetchedNews = await fetch(NEWS_BASE + endpoint + "?" + country + API_KEY).then(res => res.json());
       fetchedNews = await fetch(NEWS_BASE + NEWS_SEARCH + SHOW_FIELD_THUMB + "&" + NEWS_CATEGORY + category[i] + "&" + PAGE_SIZE + "15" + "&" + API_KEY).then(res => res.json());
-      console.log(NEWS_BASE + NEWS_SEARCH + SHOW_FIELD_THUMB + "&" + NEWS_CATEGORY + category[i] + "&" + PAGE_SIZE + "50" + "&" + API_KEY);
+      //console.log(NEWS_BASE + NEWS_SEARCH + SHOW_FIELD_THUMB + "&" + NEWS_CATEGORY + category[i] + "&" + PAGE_SIZE + "50" + "&" + API_KEY);
 
       filteredFetchNews = fetchedNews.response.results.map((element:any) => {
         let date = new Date(element.publishedAt)
@@ -101,10 +103,12 @@ export class NewsFetchServiceService {
           "news": filteredFetchNews
         }
       )
+
+      loadArray[i] = 1;
+
+      this._categoryNews.next(newsArray);
+
+      this._categoryNewsLoad.next(loadArray);
     }
-
-    this._categoryNews.next(newsArray);
-
-    this._categoryNewsLoad.next(1);
   }
 }

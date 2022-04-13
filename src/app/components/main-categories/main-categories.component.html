@@ -1,6 +1,6 @@
 <div class="mainCategories">
-    <div *ngIf="categoryNewsLoad === 1" class="categoryWrap">
-        <div *ngFor="let category of categoryNews" class="eachCategoryWrap">
+    <div *ngFor="let category of categoryNews; let i = index" class="eachCategoryWrap">
+        <div *ngIf="categoryNewsLoad[i] === 1" class="categoryWrap">
             <div class="categoryMainWrap">
                 <div class="categoryTitle">
                     <span>{{category.category.toUpperCase()}}</span>

@@ -2,7 +2,7 @@ import { NewsFetchServiceService } from 'src/app/services/newsFetchService/news-
 import { Component, OnInit } from '@angular/core';
 
 //const CATEGORY = ["general", "business", "science", "technology", "health", "sports", "entertainment"]
-const CATEGORY = ["world", "technology", "business", "sport", "film"];
+import { CATEGORY } from 'src/app/services/newsFetchService/news-fetch-service.service';
 
 @Component({
   selector: 'app-main-categories',
@@ -11,7 +11,7 @@ const CATEGORY = ["world", "technology", "business", "sport", "film"];
 })
 export class MainCategoriesComponent implements OnInit {
 
-  categoryNewsLoad: number = 1;
+  categoryNewsLoad: any;
   categoryNews: any;
 
   constructor(private _newsFetchService: NewsFetchServiceService) { }
@@ -22,7 +22,7 @@ export class MainCategoriesComponent implements OnInit {
     )
 
     this._newsFetchService.categoryNews$.subscribe(object => {
-      console.log(object);
+      //console.log(object);
       this.categoryNews = object
     })
 

@@ -51,3 +51,29 @@
         }
     }
 }
+
+@media screen and (max-width: 850px) {
+    .topNewsSide {
+        flex-direction: row;
+        overflow-y: hidden;
+        overflow-x: auto;
+        width: 100%;
+        max-width: 100%;
+        padding: 0 0 0.5rem 0;
+        height: 100%;
+
+        .eachTopNews {
+            width: 10rem;
+            height: 100%;
+            text-overflow: ellipsis;
+            flex-shrink: 0;
+            font-size: 0.5rem;
+            background-repeat: none;
+            margin-bottom: 0;
+    
+            &:not(:last-child) {
+                margin-right: 0.5rem;
+            }
+        }
+    }  
+}
