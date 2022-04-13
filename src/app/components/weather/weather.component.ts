@@ -99,7 +99,7 @@ export class WeatherComponent implements OnInit {
     clearTimeout(this.timer);
     this.timer = setTimeout(() => this._weatherFetchService.fetchCity().subscribe(item => {
 
-      if (value.length > 3) {
+      if (value.length > 2) {
         let firstFilter = item.filter((city:any) => {
           return (city.name.replace(/\s/g, "").match(regex) != null)
         })

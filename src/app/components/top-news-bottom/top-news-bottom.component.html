@@ -1,0 +1,5 @@
+<div class="topNewsBottom">
+    <div *ngFor="let news of topNews" class="eachTopNews" [ngStyle]="{'background-image': 'url('+ news.urlToImage +')'}">
+        <a href={{news.url}} target="_blank">{{news.title}}</a>
+    </div>
+</div>

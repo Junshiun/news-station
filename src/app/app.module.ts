@@ -15,12 +15,20 @@ import { MatSelectModule } from '@angular/material/select';
 import { HeaderComponent } from './components/header/header.component';
 import { WeatherComponent } from './components/weather/weather.component';
 import { WeatherFetchServiceService } from './services/weatherFetchService/weather-fetch-service.service';
+import { TopNewsComponent } from './components/top-news/top-news.component';
+import { TopNewsSideComponent } from './components/top-news-side/top-news-side.component';
+import { TopNewsBottomComponent } from './components/top-news-bottom/top-news-bottom.component';
+import { MainCategoriesComponent } from './components/main-categories/main-categories.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    WeatherComponent
+    WeatherComponent,
+    TopNewsComponent,
+    TopNewsSideComponent,
+    TopNewsBottomComponent,
+    MainCategoriesComponent
   ],
   imports: [
     BrowserModule,

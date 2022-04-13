@@ -1,0 +1,13 @@
+<div class="topNewsWrap">
+    <div *ngIf="topNewsLoad===1" class="topNewsContainer">
+        <!--https://www.reuters.com/resizer/5EqBkdE60OyCPF_JVcI1oNGSa0M=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/NOS6UMPVRJIQHIYFBZTP53CXNM.jpg-->
+        <div class="topNewsHighlight" [ngStyle]="{'background-image': 'url('+ topNews[0].fields.thumbnail +')'}">
+            <span class="source">{{topNews[0].sectionName}}</span>
+            <span class="date">{{topNews[0].date}} / {{topNews[0].month}} / {{topNews[0].year}}</span>
+            <div class="detailsBox">
+                <a href={{topNews[0].webUrl}} target="_blank">{{topNews[0].webTitle}}</a>
+                <p>{{topNews[0].fields.trailText}}</p>
+            </div>
+        </div>
+    </div>
+</div>

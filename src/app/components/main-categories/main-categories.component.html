@@ -1,0 +1,58 @@
+<div class="mainCategories">
+    <div *ngIf="categoryNewsLoad === 1" class="categoryWrap">
+        <div *ngFor="let category of categoryNews" class="eachCategoryWrap">
+            <div class="categoryMainWrap">
+                <div class="categoryTitle">
+                    <span>{{category.category.toUpperCase()}}</span>
+                </div>
+                <div class="categoryMain" [ngStyle]="{'background-image': 'url(' + category.news[0].fields.thumbnail + ')'}">
+                    <div class="detailsBox">
+                        <a href={{category.news[0].webUrl}} target="_blank">{{category.news[0].webTitle}}</a>
+                        <p>{{category.news[0].fields.trailText}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="categorySubOne">
+                <div *ngFor="let news of category.news.slice(2, 4)" class="subOne">
+                    <div class="subOneTop">
+                        <img src={{news.fields.thumbnail}}>
+                        <a href={{news.webUrl}} target="_blank">{{news.webTitle}}</a>
+                    </div>
+                    <div class="detailsBox">
+                        <p>{{news.fields.trailText}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="categorySubTwo">
+                <div *ngFor="let news of category.news.slice(4, 8)" class="subTwo">
+                    <div class="subTwoImage">
+                        <img src={{news.fields.thumbnail}}>
+                    </div>
+                    <div class="detailsBox">
+                        <a href={{news.webUrl}} target="_blank">{{news.webTitle}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="categorySubThree">
+                <div *ngFor="let news of category.news.slice(1, 2)" class="subThree">
+                    <div class="subThreeLeft">
+                        <img src={{news.fields.thumbnail}}>
+                    </div>
+                    <div class="detailsBox">
+                        <a href={{news.webUrl}} target="_blank">{{news.webTitle}}</a>
+                        <p class="text">
+                            {{news.fields.bodyText}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="categorySubFour">
+                <a *ngFor="let news of category.news.slice(8)" class="subFour" href={{news.webUrl}} target="_blank">
+                    <div class="detailsBox">
+                        <p class="title">{{news.webTitle}}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
