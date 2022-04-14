@@ -6,6 +6,8 @@
     height: 25rem;
     display: flex;
     flex-direction: column;
+    background-color: var(--rootColor);
+    padding: 1rem;
 
     .topBar {
         display: flex;
@@ -52,7 +54,6 @@
         }
 
         &City {
-            position: relative;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -68,20 +69,23 @@
             }
 
             .currentCountry {
-                color: #999999;
                 margin-left: 0.5rem;
                 font-size: 0.6rem;
             }
 
+            .locationInput {
+                position: relative;
+            }
+
             .filteredCityWrap {
                 position: absolute;
-                left: 0;
-                top: 2rem;
+                left: -3.5rem;
+                top: 1.6rem;
                 max-height: 10rem;
                 overflow-y: auto;
                 overflow-x: hidden;
                 background-color: white;
-                width: 100%;
+                width: 150%;
                 padding: 0.5rem;
                 margin: 0;
             }

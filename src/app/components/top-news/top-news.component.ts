@@ -8,7 +8,7 @@ import { NewsFetchServiceService } from 'src/app/services/newsFetchService/news-
 })
 export class TopNewsComponent implements OnInit {
 
-  topNewsLoad: number = 1;
+  topNewsLoad: number = 0;
   topNews: any;
 
   constructor(private _newsFetchService:NewsFetchServiceService) { }

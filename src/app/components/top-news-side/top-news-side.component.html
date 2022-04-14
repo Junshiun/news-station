@@ -1,5 +1,5 @@
-<div class="topNewsSide">
-    <div *ngFor="let news of topNews" class="eachTopNews" [ngStyle]="{'background-image': 'url('+ news.fields.thumbnail +')'}">
+<div *ngIf="topNewsLoad === 1" class="topNewsSide">
+    <div *ngFor="let news of topNews.slice(1, 10)" class="eachTopNews" [ngStyle]="{'background-image': 'url('+ news.fields.thumbnail +')'}">
         <span class="source">{{news.sectionName}}</span>
         <span class="date">{{news.date}} / {{news.month}} / {{news.year}}</span>
         <a href={{news.webUrl}} target="_blank">{{news.webTitle}}</a>

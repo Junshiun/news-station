@@ -11,7 +11,7 @@ export class TopNewsSideComponent implements OnInit {
   constructor(private _newsFetchService:NewsFetchServiceService) { }
 
   topNews: any;
-  topNewsLoad: number = 1;
+  topNewsLoad: number = 0;
 
   ngOnInit(): void {
     
@@ -20,7 +20,7 @@ export class TopNewsSideComponent implements OnInit {
     })
 
     this._newsFetchService.topNews$.subscribe(news => {
-      this.topNews = news.splice(1, 10);
+      this.topNews = news;
     })
     
 

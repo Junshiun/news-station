@@ -171,7 +171,7 @@
             .detailsBox {
                 width: 70%;
                 overflow: hidden;
-                padding-left: 0.5rem;
+                padding: 0 0.5rem 0 0.5rem;
 
                 a {
                     text-decoration: none;
@@ -216,7 +216,7 @@
                     text-decoration: none;
                     color: black;
                     flex-grow: 1;
-                    font-size: 1.5rem;
+                    font-size: 1.4rem;
                     line-height: 1.5rem;
                 }
 
@@ -288,7 +288,7 @@
             grid-area: b;
 
             a {
-                font-size: 1rem !important;
+                font-size: 1.1rem !important;
             }
 
             .text {

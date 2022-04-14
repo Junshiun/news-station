@@ -36,10 +36,17 @@ export class NewsFetchServiceService {
   private _categoryNews:Subject<any> = new Subject();
   categoryNews$ = this._categoryNews.asObservable();
 
+  private _categoryPageLoad:BehaviorSubject<number> = new BehaviorSubject(0);
+  categoryPageLoad$ = this._categoryPageLoad.asObservable();
+
+  private _categoryPageNews:Subject<any> = new Subject();
+  categoryPageNews$ = this._categoryPageNews.asObservable();
+
   constructor() { }
 
   async fetchTopNews() {
     let fetchedNews:any;
+    this._topNewsLoad.next(0);
 
     //fetchedNews = await fetch(NEWS_BASE + endpoint + "?" + NEWS_COUNTRY + country + API_KEY).then(res => res.json());
     //fetchedNews = await fetch(NEWS_BASE + endpoint + "?" + country + API_KEY).then(res => res.json());
@@ -76,6 +83,7 @@ export class NewsFetchServiceService {
     
     let newsArray: any = [];
     let loadArray: any = Array(CATEGORY.length).fill(0);
+    this._categoryNewsLoad.next(loadArray);
 
     for (let i=0; i<category.length; i++){
 
@@ -110,5 +118,18 @@ export class NewsFetchServiceService {
 
       this._categoryNewsLoad.next(loadArray);
     }
+  }
+
+  async fetchCategoryPageNews(category: string) {
+    let fetchedNews:any;
+    let filteredFetchNews: any;
+
+    this._categoryPageLoad.next(0);
+
+    fetchedNews = await fetch(NEWS_BASE + NEWS_SEARCH + SHOW_FIELD_THUMB + "&" + NEWS_CATEGORY + category + "&" + PAGE_SIZE + "16" + "&" + API_KEY).then(res => res.json());
+
+    this._categoryPageLoad.next(1);
+
+    this._categoryPageNews.next(fetchedNews.response.results);
   }
 }

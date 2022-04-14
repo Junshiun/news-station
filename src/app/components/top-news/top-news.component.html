@@ -6,7 +6,7 @@
             <span class="date">{{topNews[0].date}} / {{topNews[0].month}} / {{topNews[0].year}}</span>
             <div class="detailsBox">
                 <a href={{topNews[0].webUrl}} target="_blank">{{topNews[0].webTitle}}</a>
-                <p>{{topNews[0].fields.trailText}}</p>
+                <p [innerHTML]="topNews[0].fields.trailText"></p>
             </div>
         </div>
     </div>

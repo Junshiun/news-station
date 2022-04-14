@@ -1,0 +1,56 @@
+<div class="categoryPageTitle">{{category.toUpperCase()}}</div>
+<div class="allWrap">
+    <div *ngIf="categoryPageLoad === 1">
+        <div class="categoryTopNews">
+            <div class="categoryTopNewsOne">
+                <div class="titleBox">{{categoryPageNews[0].webTitle}}</div>
+                <div class="contentBox">
+                    <img src={{categoryPageNews[0].fields.thumbnail}}>
+                    <div class="text" [innerHTML]="categoryPageNews[0].fields.trailText"></div>
+                </div>
+            </div>
+            <div class="categoryTopNewsTwo">
+                <div *ngFor="let news of categoryPageNews.slice(1, 3)" class="container">
+                    <img src={{news.fields.thumbnail}}>    
+                    <div class="contentBox">
+                        <span class="titleBox">{{news.webTitle}}</span>
+                        <div class="text" [innerHTML]="news.fields.trailText"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="categoryPageSubOne">
+            <div class="subOneLeft">
+                <div *ngFor="let news of categoryPageNews.slice(3, 5)" class="container">
+                    <img src={{news.fields.thumbnail}}>
+                    <div class="detailsBox">
+                        <span>{{news.webTitle}}</span>
+                        <div class="text" [innerHTML]="news.fields.trailText"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="subOneRight">
+                <div *ngFor="let news of categoryPageNews.slice(5, 7)" class="container">
+                    <img src={{news.fields.thumbnail}}>
+                    <div class="detailsBox">
+                        <span>{{news.webTitle}}</span>
+                        <div class="text" [innerHTML]="news.fields.trailText"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="categoryPageSubTwo">
+            <div *ngFor="let news of categoryPageNews.slice(7, -1)" class="container">
+                <div class="centerContainer">
+                    <div class="imageBox">
+                        <img src={{news.fields.thumbnail}}>
+                    </div>
+                    <div class="detailsBox">
+                        <span>{{news.webTitle}}</span>
+                        <div class="text" [innerHTML]="news.fields.trailText"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
