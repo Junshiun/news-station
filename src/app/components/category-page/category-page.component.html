@@ -2,55 +2,73 @@
 <div class="allWrap">
     <div *ngIf="categoryPageLoad === 1">
         <div class="categoryTopNews">
-            <div class="categoryTopNewsOne">
-                <div class="titleBox">{{categoryPageNews[0].webTitle}}</div>
+            <a class="categoryTopNewsOne" href={{categoryPageNews[0].webUrl}} target="_blank">
+                <span class="titleBox">{{categoryPageNews[0].webTitle}}</span>
                 <div class="contentBox">
-                    <img src={{categoryPageNews[0].fields.thumbnail}}>
+                    <div class="imageBox">
+                        <img src={{categoryPageNews[0].fields.thumbnail}}>
+                        <div class="dateOne">{{categoryPageNews[0].date}} . {{categoryPageNews[0].month}}</div>
+                    </div>
                     <div class="text" [innerHTML]="categoryPageNews[0].fields.trailText"></div>
                 </div>
-            </div>
+            </a>
             <div class="categoryTopNewsTwo">
-                <div *ngFor="let news of categoryPageNews.slice(1, 3)" class="container">
-                    <img src={{news.fields.thumbnail}}>    
+                <a *ngFor="let news of categoryPageNews.slice(1, 3)" class="container" href={{news.webUrl}} target="_blank">
+                    <div class="imageBox">
+                        <img src={{news.fields.thumbnail}}> 
+                        <div class="dateTwo">{{news.date}} . {{news.month}}</div>   
+                    </div>
                     <div class="contentBox">
-                        <span class="titleBox">{{news.webTitle}}</span>
+                        <span class="titleBox" >{{news.webTitle}}</span>
                         <div class="text" [innerHTML]="news.fields.trailText"></div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
         <div class="categoryPageSubOne">
             <div class="subOneLeft">
-                <div *ngFor="let news of categoryPageNews.slice(3, 5)" class="container">
-                    <img src={{news.fields.thumbnail}}>
+                <a *ngFor="let news of categoryPageNews.slice(3, 5)" class="container" href={{news.webUrl}} target="_blank">
+                    <div class="imageBox">
+                        <img src={{news.fields.thumbnail}}>
+                        <div class="dateThree">{{news.date}} . {{news.month}}</div>
+                    </div>
                     <div class="detailsBox">
                         <span>{{news.webTitle}}</span>
                         <div class="text" [innerHTML]="news.fields.trailText"></div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="subOneRight">
-                <div *ngFor="let news of categoryPageNews.slice(5, 7)" class="container">
-                    <img src={{news.fields.thumbnail}}>
+                <a *ngFor="let news of categoryPageNews.slice(5, 7)" class="container" href={{news.webUrl}} target="_blank">
+                    <div class="imageBox">
+                        <img src={{news.fields.thumbnail}}>
+                        <div class="dateTwo">{{news.date}} . {{news.month}}</div> 
+                    </div>
                     <div class="detailsBox">
                         <span>{{news.webTitle}}</span>
                         <div class="text" [innerHTML]="news.fields.trailText"></div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
         <div class="categoryPageSubTwo">
-            <div *ngFor="let news of categoryPageNews.slice(7, -1)" class="container">
+            <a *ngFor="let news of categoryPageNews.slice(7, -1)" class="container" href={{news.webUrl}} target="blank">
                 <div class="centerContainer">
                     <div class="imageBox">
                         <img src={{news.fields.thumbnail}}>
+                        <div class="dateThree">{{news.date}} . {{news.month}}</div>
                     </div>
                     <div class="detailsBox">
                         <span>{{news.webTitle}}</span>
                         <div class="text" [innerHTML]="news.fields.trailText"></div>
                     </div>
                 </div>
-            </div>
+            </a>
+        </div>
+    </div>
+    <div class="pageBar" (click)="pageClick($any($event.target).value)">
+        <div *ngFor="let button of loopsNum; let i=index">
+            <button id="pageButton-{{i}}" value={{i+1}}>{{i+1}}</button>
         </div>
     </div>
 </div>

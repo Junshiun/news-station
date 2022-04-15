@@ -40,9 +40,7 @@
             margin: 1rem;
             padding: 1rem;
 
-            a {
-                text-decoration: none;
-                color: black;
+            span {
                 font-size: 1.5rem;
             }
 
@@ -53,6 +51,7 @@
                 -webkit-box-orient: vertical;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                color: black !important;
             }
         }
     }

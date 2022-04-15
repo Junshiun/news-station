@@ -7,6 +7,23 @@
 
 .eachCategoryWrap {
     width: 100%;
+    margin-bottom: 5rem;
+
+    .buttonLink {
+        margin-top: 1rem;
+        padding: 0.5rem;
+        float: right;
+        color: black;
+        background-color: white;
+        border: 1px solid var(--rootColor);
+        cursor: pointer;
+        border-radius: 1rem;
+
+        &:hover {
+            background-color: black;
+            color: var(--rootColor);
+        }
+    }
 }
 
 .categoryWrap {
@@ -18,7 +35,6 @@
     "d e f";
     grid-gap: 1rem;
     overflow: hidden;
-    margin-bottom: 5rem;
 
     .categoryMainWrap {
         display: grid;
@@ -51,6 +67,7 @@
         }
 
         .categoryMain {
+            position: relative;
             display: flex;
             height: 100%;
             overflow: hidden;
@@ -65,10 +82,8 @@
                 background-color: rgba($color: #ffffff, $alpha: 0.8);
                 padding: 0.5rem;
 
-                a {
+                span {
                     font-size: 0.9rem;
-                    text-decoration: none;
-                    color: black;
                 }
 
                 p {
@@ -79,6 +94,7 @@
                     -webkit-box-orient: vertical;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                    color: black;
                 }
             }
         }
@@ -109,18 +125,22 @@
                 height: 50%;
                 overflow: hidden;
 
-                img {
+                .imageBox {
+                    position: relative;
                     width: 50%;
                     height: 100%;
-                    object-fit: cover;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
                 }
 
-                a {
+                span {
                     width: 50%;
                     height: 100%;
                     overflow: hidden;
-                    text-decoration: none;
-                    color: black;
                     font-size: 0.7rem;
                     padding: 0 0 0 0.2rem;
                 }
@@ -130,9 +150,9 @@
                 width: 100%;
 
                 p {
-                    color: #999999;
+                    color: var(--subFontColor);
                     margin-top: 1rem;
-                    font-size: 0.6rem;
+                    font-size: 0.7rem;
                     display: -webkit-box;
                     -webkit-line-clamp: 2;
                     -webkit-box-orient: vertical;
@@ -173,9 +193,7 @@
                 overflow: hidden;
                 padding: 0 0.5rem 0 0.5rem;
 
-                a {
-                    text-decoration: none;
-                    color: black;
+                span {
                     font-size: 0.7rem;
                     display: -webkit-box;
                     -webkit-line-clamp: 2;
@@ -197,6 +215,7 @@
             grid-column-gap: 0.5rem;
 
             .subThreeLeft {
+                position: relative;
                 
                 img {
                     width: 100%;
@@ -212,9 +231,7 @@
                 flex-direction: column;
                 border-bottom: 1px solid var(--rootColor);
 
-                a {
-                    text-decoration: none;
-                    color: black;
+                span {
                     flex-grow: 1;
                     font-size: 1.4rem;
                     line-height: 1.5rem;
@@ -224,11 +241,16 @@
                     text-align: justify;
                     margin-top: 1rem;
                     display: -webkit-box;
-                    color: #999999;
+                    color: var(--subFontColor);
                     -webkit-line-clamp: 6;
                     -webkit-box-orient: vertical;
                     overflow: hidden;
                     text-overflow: ellipsis;
+
+                    &::before {
+                        content: "";
+                        margin-right: 1rem;
+                    }
                 }
             }
         }
@@ -250,7 +272,7 @@
             background-color: white;
 
             text-decoration: none;
-            color: #999999;
+            color: var(--subFontColor);
 
             .title:before {
                 content: '"';

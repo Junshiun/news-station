@@ -1,5 +1,6 @@
 import { NewsFetchServiceService } from 'src/app/services/newsFetchService/news-fetch-service.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 //const CATEGORY = ["general", "business", "science", "technology", "health", "sports", "entertainment"]
 import { CATEGORY } from 'src/app/services/newsFetchService/news-fetch-service.service';
@@ -14,7 +15,7 @@ export class MainCategoriesComponent implements OnInit {
   categoryNewsLoad: any;
   categoryNews: any;
 
-  constructor(private _newsFetchService: NewsFetchServiceService) { }
+  constructor(private _newsFetchService: NewsFetchServiceService, private _router:Router) { }
 
   ngOnInit(): void {
     this._newsFetchService.categoryNewsLoad$.subscribe(status =>
@@ -29,6 +30,12 @@ export class MainCategoriesComponent implements OnInit {
     //this.categoryNews = TEST_NEWS;
 
     this._newsFetchService.fetchCategoryNews(CATEGORY);
+  }
+
+  linkClick(target: string) {
+    this._router.navigate([target]).then(() => {
+      window.location.reload()
+    });
   }
 
 }

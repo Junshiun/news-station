@@ -13,6 +13,7 @@ import { Injectable } from '@angular/core';
 export const NEWS_BASE = "https://content.guardianapis.com/";
 export const NEWS_SEARCH = "search?";
 export const NEWS_CATEGORY = "section=";
+export const PAGE_NUM = "page=";
 export const PAGE_SIZE = "page-size=";
 export const API_KEY = "api-key=31b5604b-361c-4a18-9a6d-de6101cc3821";
 
@@ -42,11 +43,15 @@ export class NewsFetchServiceService {
   private _categoryPageNews:Subject<any> = new Subject();
   categoryPageNews$ = this._categoryPageNews.asObservable();
 
+  private _currentCategory:Subject<string> = new Subject();
+  currentCategory$ = this._currentCategory.asObservable();
+
   constructor() { }
 
   async fetchTopNews() {
     let fetchedNews:any;
     this._topNewsLoad.next(0);
+    this._currentCategory.next("");
 
     //fetchedNews = await fetch(NEWS_BASE + endpoint + "?" + NEWS_COUNTRY + country + API_KEY).then(res => res.json());
     //fetchedNews = await fetch(NEWS_BASE + endpoint + "?" + country + API_KEY).then(res => res.json());
@@ -96,7 +101,7 @@ export class NewsFetchServiceService {
       //console.log(NEWS_BASE + NEWS_SEARCH + SHOW_FIELD_THUMB + "&" + NEWS_CATEGORY + category[i] + "&" + PAGE_SIZE + "50" + "&" + API_KEY);
 
       filteredFetchNews = fetchedNews.response.results.map((element:any) => {
-        let date = new Date(element.publishedAt)
+        let date = new Date(element.webPublicationDate)
         return {
           ...element,
           date: date.getDate(),
@@ -120,16 +125,33 @@ export class NewsFetchServiceService {
     }
   }
 
-  async fetchCategoryPageNews(category: string) {
+  async fetchCategoryPageNews(category: string, page:number) {
+
+    this._currentCategory.next(category);
+
+    this._categoryPageNews.next("");
+
     let fetchedNews:any;
-    let filteredFetchNews: any;
+    let modifiedNews: any;
 
     this._categoryPageLoad.next(0);
 
-    fetchedNews = await fetch(NEWS_BASE + NEWS_SEARCH + SHOW_FIELD_THUMB + "&" + NEWS_CATEGORY + category + "&" + PAGE_SIZE + "16" + "&" + API_KEY).then(res => res.json());
+    fetchedNews = await fetch(NEWS_BASE + NEWS_SEARCH + SHOW_FIELD_THUMB + "&" + NEWS_CATEGORY + category + "&" + PAGE_NUM + page + "&" + PAGE_SIZE + "16" + "&" + API_KEY).then(res => res.json());
+
+    modifiedNews = fetchedNews.response.results.map((element:any) => {
+      let date = new Date(element.webPublicationDate)
+      return {
+        ...element,
+        date: date.getDate(),
+        month: date.getMonth() + 1,
+        year: date.getFullYear()
+      }
+    })
+
+    //console.log(NEWS_BASE + NEWS_SEARCH + SHOW_FIELD_THUMB + "&" + NEWS_CATEGORY + category + "&" + PAGE_NUM + page + "&" + PAGE_SIZE + "16" + "&" + API_KEY);
 
     this._categoryPageLoad.next(1);
 
-    this._categoryPageNews.next(fetchedNews.response.results);
+    this._categoryPageNews.next(modifiedNews);
   }
 }

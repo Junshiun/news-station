@@ -1,12 +1,12 @@
 <div class="headerWrap">
-    <div class="headerTitle">
-        <span routerLink="">news Station</span>
+    <div class="headerTitle" (click)="linkClick($any($event.target))">
+        <span value="">news Station</span>
     </div>
-    <ul class="categoriesList">
-        <li routerLink="world">WORLD</li>
-        <li routerLink="technology">TECHNOLOGY</li>
-        <li routerLink="business">BUSINESS</li>
-        <li routerLink="sport">SPORT</li>
-        <li routerLink="film">FILM</li>
+    <ul class="categoriesList" (click)="linkClick($any($event.target))">
+        <li value="world">WORLD</li>
+        <li value="technology">TECHNOLOGY</li>
+        <li value="business">BUSINESS</li>
+        <li value="sport">SPORT</li>
+        <li value="film">FILM</li>
     </ul>
 </div>

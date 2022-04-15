@@ -2,12 +2,20 @@
 :root {
     --rootColor: #f1c232;
     --rootColorRGB: 241, 194, 50; 
+    --subFontColor: #999999;
+    --footerHeight: 8rem;
 }
 
-html, body { height: 100%; }
+html, body { 
+    scroll-behavior: smooth;
+    position: relative;
+    min-height: 100vh; 
+}
+
 body { 
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
+    padding-bottom: var(--footerHeight);
 }
 
 * {
@@ -17,4 +25,56 @@ body {
 .allWrap {
     max-width: 100vw;
     padding: 1rem 2rem 0 2rem;
+}
+
+.dateOne, .dateTwo, .dateThree, .dateFour{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    background-color: rgba($color: var(--rootColorRGB), $alpha: 0.8);
+    color: #444444;
+    padding: 0;
+}
+
+.dateOne, .dateTwo, .dateFour {
+    top: 0;
+    right: 0;
+    height: 3rem;
+    width: 3rem;
+    font-size: 0.8rem;
+    border-radius: 50%;
+}
+
+.dateTwo {
+    font-size: 0.6rem;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.dateThree {
+    bottom: 0;
+    right: 0;
+    margin: 0.5rem;
+    height: 1.5rem;
+    width: 3rem;
+    font-size: 0.7rem;
+    border-radius: 0.5rem;
+}
+
+.dateFour {
+    font-size: 0.7rem;
+    border-radius: 0.5rem;
+    width: 3rem;
+    height: 1.5rem;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    
+    &:hover {
+        color: #bf9000 !important;
+    }
 }

@@ -1,0 +1,13 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: var(--footerHeight);
+    width: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--rootColor);
+    padding: 1rem;
+}

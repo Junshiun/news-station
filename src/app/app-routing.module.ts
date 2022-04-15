@@ -4,12 +4,16 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { CategoryPageComponent } from './components/category-page/category-page.component';
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent,},
-  { path: ':category', component: CategoryPageComponent}
+  { path: '', 
+    component: MainPageComponent,
+  },
+  { path: ':category', 
+    component: CategoryPageComponent,
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload', scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

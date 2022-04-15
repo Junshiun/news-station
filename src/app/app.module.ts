@@ -21,6 +21,7 @@ import { TopNewsBottomComponent } from './components/top-news-bottom/top-news-bo
 import { MainCategoriesComponent } from './components/main-categories/main-categories.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { CategoryPageComponent } from './components/category-page/category-page.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CategoryPageComponent } from './components/category-page/category-page.
     TopNewsBottomComponent,
     MainCategoriesComponent,
     MainPageComponent,
-    CategoryPageComponent
+    CategoryPageComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
