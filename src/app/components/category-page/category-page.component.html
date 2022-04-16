@@ -52,8 +52,8 @@
             </div>
         </div>
         <div class="categoryPageSubTwo">
-            <a *ngFor="let news of categoryPageNews.slice(7, -1)" class="container" href={{news.webUrl}} target="blank">
-                <div class="centerContainer">
+            <div *ngFor="let news of categoryPageNews.slice(7, -1)" class="container">
+                <a class="centerContainer" href={{news.webUrl}} target="blank">
                     <div class="imageBox">
                         <img src={{news.fields.thumbnail}}>
                         <div class="dateThree">{{news.date}} . {{news.month}}</div>
@@ -62,8 +62,8 @@
                         <span>{{news.webTitle}}</span>
                         <div class="text" [innerHTML]="news.fields.trailText"></div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     </div>
     <div class="pageBar" (click)="pageClick($any($event.target).value)">
