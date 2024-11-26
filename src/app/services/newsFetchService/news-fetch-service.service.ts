@@ -15,7 +15,7 @@ export const NEWS_SEARCH = "search?";
 export const NEWS_CATEGORY = "section=";
 export const PAGE_NUM = "page=";
 export const PAGE_SIZE = "page-size=";
-export const API_KEY = "api-key=31b5604b-361c-4a18-9a6d-de6101cc3821";
+export const API_KEY = "api-key=66210d66-ea20-4c10-bce7-dd7576d4564c";
 
 export const SHOW_FIELD_THUMB = "show-fields=all";
 export const CATEGORY = ["world", "technology", "business", "sport", "film"];
@@ -56,6 +56,8 @@ export class NewsFetchServiceService {
     //fetchedNews = await fetch(NEWS_BASE + endpoint + "?" + NEWS_COUNTRY + country + API_KEY).then(res => res.json());
     //fetchedNews = await fetch(NEWS_BASE + endpoint + "?" + country + API_KEY).then(res => res.json());
     fetchedNews = await fetch(NEWS_BASE + NEWS_SEARCH + SHOW_FIELD_THUMB + "&" + API_KEY).then(res => res.json());
+    // fetchedNews = await fetch("https://content.guardianapis.com/search?api-key=66210d66-ea20-4c10-bce7-dd7576d4564c").then(res => res.json());
+    console.log(fetchedNews);
 
     /*
     this._topNews.next(fetchedNews.articles.filter((element:any) => {

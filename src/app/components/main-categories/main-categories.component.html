@@ -39,8 +39,8 @@
             </div>
             <div class="categorySubThree">
                 <a *ngFor="let news of category.news.slice(1, 2)" class="subThree" href={{news.webUrl}} target="_blank">
-                    <div class="subThreeLeft">
-                        <img src={{news.fields.thumbnail}}>
+                    <div class="subThreeLeft"  [ngStyle]="{'background-image': 'url(' + news.fields.thumbnail + ')'}">
+                        <!-- <img src={{news.fields.thumbnail}}> -->
                         <div class="dateTwo">{{news.date}} . {{news.month}}</div>
                     </div>
                     <div class="detailsBox">
